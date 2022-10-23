@@ -6,7 +6,7 @@
     height: 100%;
 }
 
-.color{
+.color, .bg__menu{
     background-color: rgb(238, 7, 122);
     border-radius: 10px;
 }
