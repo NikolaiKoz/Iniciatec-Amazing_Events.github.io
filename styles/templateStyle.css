@@ -6,18 +6,27 @@
     height: 100%;
 }
 
-main{
-    height: 250px;
-}
-
 .color{
     background-color: rgb(238, 7, 122);
     border-radius: 10px;
 }
 
 .color:hover,
-.nav__containerImg__img:hover{
+.nav__containerImg__img:hover,
+footer .iconBg:hover{
     box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
     transition: ease-in-out 0.3s;
     transform: translateY(-5px);
 }
+
+main{
+    height: 250px;
+}
+
+footer .iconBg{
+    height: 2.5em;
+    width: 2.5em;
+    background-color: rgb(238, 7, 122);
+    border-radius: 50%;
+}
+
