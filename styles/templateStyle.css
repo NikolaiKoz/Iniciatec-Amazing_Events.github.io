@@ -26,3 +26,10 @@ footer > div > .iconBg{
     border-radius: 50%;
 }
 
+@media screen and (max-width: 650px) {
+    #checkBox{
+        flex-direction: column;
+    }
+}
+
+
