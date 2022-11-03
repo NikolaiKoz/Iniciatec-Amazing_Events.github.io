@@ -159,12 +159,13 @@ const data = {
   }
 
 const cardsContainer = document.getElementById('cardsContainer');
+const otro = data.eventos.map(event => event.name);
 const cardTemplate =
     `
     <div class="card m-2" style="width: 18rem;">
     <img src="./assets/Cine7.jpg" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
+      <h5 class="card-title">${otro}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       <a href="#" class="btn color">Go somewhere</a>
     </div>
@@ -172,11 +173,13 @@ const cardTemplate =
     `
 ;
 
+
+console.log(otro);
+
 cardsContainer.innerHTML += cardTemplate;
 cardsContainer.innerHTML += cardTemplate;
 cardsContainer.innerHTML += cardTemplate;
-cardsContainer.innerHTML += cardTemplate;
+cardsContainer.innerHTML += otro;
 
 
 
-console.log(names);
