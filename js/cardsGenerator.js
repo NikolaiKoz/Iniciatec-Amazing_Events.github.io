@@ -158,7 +158,7 @@ const data = {
     ]
   }
 
-let cardsContainer = document.getElementById('cardsContainer');
+const cardsContainer = document.getElementById('cardsContainer');
 const cardTemplate =
     `
     <div class="card m-2" style="width: 18rem;">
@@ -172,7 +172,10 @@ const cardTemplate =
     `
 ;
 
-cardsContainer.innerHTML = cardTemplate;
+cardsContainer.innerHTML += cardTemplate;
+cardsContainer.innerHTML += cardTemplate;
+cardsContainer.innerHTML += cardTemplate;
+cardsContainer.innerHTML += cardTemplate;
 
 
 
