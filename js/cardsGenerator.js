@@ -159,27 +159,35 @@ const data = {
   }
 
 const cardsContainer = document.getElementById('cardsContainer');
-const otro = data.eventos.map(event => event.name);
-const cardTemplate =
-    `
+const events = data.eventos.map(event => event);
+
+
+
+
+const cardGenerator = (events) => {
+
+  let card = "";
+
+  for(let i = 0; i < events.length; i++){
+
+    card = `
     <div class="card m-2" style="width: 18rem;">
-    <img src="./assets/Cine7.jpg" class="card-img-top" alt="...">
+    <img src="${events[i].image}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">${otro}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn color">Go somewhere</a>
+      <h5 class="card-title">${events[i].name}</h5>
+      <p class="card-text">${events[i].description}</p>
+      <a href="#" class="btn color">More info</a>
     </div>
     </div>
-    `
-;
+    `;
+
+    cardsContainer.innerHTML += card;
+  }
+};
+
+console.log(cardGenerator(data.eventos))
 
 
-console.log(otro);
-
-cardsContainer.innerHTML += cardTemplate;
-cardsContainer.innerHTML += cardTemplate;
-cardsContainer.innerHTML += cardTemplate;
-cardsContainer.innerHTML += otro;
 
 
 
