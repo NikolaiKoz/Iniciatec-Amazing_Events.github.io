@@ -158,36 +158,66 @@ const data = {
     ]
   }
 
+
 const cardsContainer = document.getElementById('cardsContainer');
-const events = data.eventos.map(event => event);
+const upcomingEvents = document.getElementById('upcomingEvents');
+const pastEvents = document.getElementById('pastEvents');
+const actualDate = Date.parse(data.fechaActual);
+const arrUpcoming = [];
+const arrPastEvents = [];
+const arrHome = [];
 
+const dataBase = data.eventos.map(evets => evets);
 
-
+const site = () =>{
+const URL = window.location.pathname.split('/').pop();
+  switch (URL) {
+    case 'index.html': printCard(URL, arrHome, cardsContainer);
+      break;
+    case 'upcomingEvents.html': printCard(URL, arrUpcoming, upcomingEvents);
+      break;
+    case 'pastEvents.html': printCard(URL, arrPastEvents, pastEvents);
+      break;
+  }
+}
 
 const cardGenerator = (events) => {
 
-  let card = "";
+  let date = '';
 
-  for(let i = 0; i < events.length; i++){
 
-    card = `
+  for (const event of events) {
+
+    const card = `
     <div class="card m-2" style="width: 18rem;">
-    <img src="${events[i].image}" class="card-img-top" alt="...">
+    <img src="${event.image}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">${events[i].name}</h5>
-      <p class="card-text">${events[i].description}</p>
+      <h5 class="card-title">${event.name}</h5>
+      <p class="card-text">${event.description}</p>
       <a href="#" class="btn color">More info</a>
     </div>
     </div>
     `;
 
-    cardsContainer.innerHTML += card;
+    arrHome.push(card);
+
+    date = Date.parse(event.date);
+
+    if(date > actualDate){
+      arrUpcoming.push(card);
+    }
+    if(date < actualDate){
+      arrPastEvents.push(card);
+    }
   }
 };
 
-console.log(cardGenerator(data.eventos))
+const printCard = (URL, array, container) =>{
+  const URLORDER = window.location.pathname.split('/').pop();
+  if( URL === URLORDER){
+    array.map( e => { container.insertAdjacentHTML("beforeend", e) });
+  }
+}
 
-
-
-
-
+cardGenerator(dataBase);
+site();
