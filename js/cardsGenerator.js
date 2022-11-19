@@ -219,5 +219,34 @@ const printCard = (URL, array, container) =>{
   }
 }
 
+
+
+const categoriesGenerator = () =>{
+
+  const categoriesBar = document.getElementById('checkBox');
+  //First i need to have an Array with the categories.
+  const allCategories = dataBase.map( category => category.category ); //All categories.
+
+  const category = allCategories.filter( ( value, index ) => allCategories.indexOf(value) === index ); //Delete the duplicates.
+
+  //Later than i will created every category and added in the HTML.
+  const categoryCheckbox = category.map( category => `<div class="form-check me-2 ms-2">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                          ${category}
+                                                        </label>
+                                                      </div>` );
+
+  for (let index = 0; index < categoryCheckbox.length; index++) {
+    categoriesBar.innerHTML += categoryCheckbox[index];
+  }
+
+  //This algorithm it should be on each page with the cards.
+
+}
+
+
+
 cardGenerator(dataBase);
 site();
+categoriesGenerator();
