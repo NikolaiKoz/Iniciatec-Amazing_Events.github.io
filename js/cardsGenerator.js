@@ -232,7 +232,7 @@ const categoriesGenerator = () =>{
 
   //Later than i will created every category and added in the HTML.
   const categoryCheckbox = category.map( category => `<div class="form-check me-2 ms-2">
-                                                        <input class="form-check-input" type="radio" id="info" name="category" value="${category}">
+                                                        <input class="form-check-input" type="checkbox" id="info" name="category" value="${category}">
                                                           ${category}
                                                       </div>`
   );
@@ -252,19 +252,24 @@ const searchAndFilterCards = () => {
   const elemntsCategory = document.getElementsByClassName('category');
 
   categoriesBar.addEventListener("click", (selecCategory) => {
-    let findCategori = selecCategory.path[0].value
+
+    const inputs = document.querySelectorAll('input[type="checkbox"]');
+
+    const checkedInputs = [];
+
+    inputs.forEach(input => {
+      if(input.checked){
+        checkedInputs.push(input.value);
+      }
+    }
+    );
 
     for (let i = 0; i < elemntsCategory.length; i++) {
-      if (elemntsCategory[i].textContent !== findCategori) {
+      if(checkedInputs.includes(elemntsCategory[i].textContent)){
+        elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
+      }else{
         elemntsCategory[i].parentElement.parentElement.classList.add('d-none');
-      } else {
-        elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
       }
-
-      if(findCategori === 'All'){
-        elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
-      }
-
     }
 
   });
@@ -280,6 +285,7 @@ const searchAndFilterCards = () => {
     let inputText = event.target.value;
 
     for (let i = 0; i < elemntsCategory.length; i++) {
+
       if (elemntsCategory[i].parentElement.children[0].textContent.toLowerCase().indexOf(inputText) === -1) {
         elemntsCategory[i].parentElement.parentElement.classList.add('d-none');
       } else {
