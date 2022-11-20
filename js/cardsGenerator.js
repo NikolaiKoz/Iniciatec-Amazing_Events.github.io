@@ -286,9 +286,22 @@ const searchAndFilterCards = () => {
         elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
       }
     }
-  });
 
-  
+
+    const cards = document.getElementsByClassName('card').length;
+    const cardsNotHidden = document.getElementsByClassName('card d-none').length;
+
+
+    if (cards === cardsNotHidden) {
+
+      document.getElementById('errorMessaje').classList.remove('d-none');
+      search.classList.add('errorColor');
+    } else {
+      document.getElementById('errorMessaje').classList.add('d-none');
+      search.classList.remove('errorColor');
+    }
+
+  });
 
 }
 
