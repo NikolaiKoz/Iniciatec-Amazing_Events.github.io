@@ -269,17 +269,19 @@ const searchAndFilterCards = () => {
 
   });
 
+  const search = document.getElementById('search');
 
 
+  search.addEventListener("keyup", () => {
 
+    const allCategory = document.getElementById('info');
+    allCategory.checked = true;
 
+    
+
+  });
 
 }
-
-//sacar por conso
-
-
-
 
 cardGenerator(dataBase);
 site();
