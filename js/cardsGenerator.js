@@ -250,7 +250,6 @@ const searchAndFilterCards = () => {
   const categoriesBar = document.getElementById('checkBox');
 
   const elemntsCategory = document.getElementsByClassName('category');
-  console.log(elemntsCategory[0].textContent)
 
   categoriesBar.addEventListener("click", (selecCategory) => {
     let findCategori = selecCategory.path[0].value
@@ -261,10 +260,13 @@ const searchAndFilterCards = () => {
       } else {
         elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
       }
+
+      if(findCategori === 'All'){
+        elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
+      }
+
     }
 
-
-    console.log(findCategori)
   });
 
 
