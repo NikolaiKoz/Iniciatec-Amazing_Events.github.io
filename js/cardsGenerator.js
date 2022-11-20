@@ -193,6 +193,7 @@ const cardGenerator = (events) => {
     <img src="${event.image}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${event.name}</h5>
+      <h5 class="card-title d-none category">${event.category}</h5>
       <p class="card-text">${event.description}</p>
       <a href="#" class="btn color">More info</a>
     </div>
@@ -231,22 +232,54 @@ const categoriesGenerator = () =>{
 
   //Later than i will created every category and added in the HTML.
   const categoryCheckbox = category.map( category => `<div class="form-check me-2 ms-2">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                        <input class="form-check-input" type="radio" id="info" name="category" value="${category}">
                                                           ${category}
-                                                        </label>
-                                                      </div>` );
+                                                      </div>`
+  );
 
-  for (let index = 0; index < categoryCheckbox.length; index++) {
-    categoriesBar.innerHTML += categoryCheckbox[index];
-  }
+  categoryCheckbox.map( e => { categoriesBar.insertAdjacentHTML("beforeend", e) });
 
   //This algorithm it should be on each page with the cards.
 
 }
+
+//Obtener el valor del imput
+
+const searchAndFilterCards = () => {
+
+  const categoriesBar = document.getElementById('checkBox');
+
+  const elemntsCategory = document.getElementsByClassName('category');
+  console.log(elemntsCategory[0].textContent)
+
+  categoriesBar.addEventListener("click", (selecCategory) => {
+    let findCategori = selecCategory.path[0].value
+
+    for (let i = 0; i < elemntsCategory.length; i++) {
+      if (elemntsCategory[i].textContent !== findCategori) {
+        elemntsCategory[i].parentElement.parentElement.classList.add('d-none');
+      } else {
+        elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
+      }
+    }
+
+
+    console.log(findCategori)
+  });
+
+
+
+
+
+
+}
+
+//sacar por conso
+
 
 
 
 cardGenerator(dataBase);
 site();
 categoriesGenerator();
+searchAndFilterCards();
