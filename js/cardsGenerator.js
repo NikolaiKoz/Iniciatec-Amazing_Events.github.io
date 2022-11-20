@@ -289,6 +289,14 @@ const searchAndFilterCards = () => {
         elemntsCategory[i].parentElement.parentElement.classList.add("d-none");
       }
     }
+
+    if (checkedInputs.length === 0) {
+      for (let i = 0; i < elemntsCategory.length; i++) {
+        elemntsCategory[i].parentElement.parentElement.classList.remove(
+          "d-none"
+        );
+      }
+    }
   });
 
   const search = document.getElementById("search");
