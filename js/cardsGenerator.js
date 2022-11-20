@@ -272,14 +272,23 @@ const searchAndFilterCards = () => {
   const search = document.getElementById('search');
 
 
-  search.addEventListener("keyup", () => {
+  search.addEventListener("keyup", (event) => {
 
     const allCategory = document.getElementById('info');
     allCategory.checked = true;
 
-    
+    let inputText = event.target.value;
 
+    for (let i = 0; i < elemntsCategory.length; i++) {
+      if (elemntsCategory[i].parentElement.children[0].textContent.toLowerCase().indexOf(inputText) === -1) {
+        elemntsCategory[i].parentElement.parentElement.classList.add('d-none');
+      } else {
+        elemntsCategory[i].parentElement.parentElement.classList.remove('d-none');
+      }
+    }
   });
+
+  
 
 }
 
