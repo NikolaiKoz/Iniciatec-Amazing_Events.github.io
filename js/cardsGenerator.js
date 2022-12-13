@@ -211,7 +211,7 @@ const cardGenerator = (events) => {
       <h5 class="card-title">${event.name}</h5>
       <h5 class="card-title d-none category">${event.category}</h5>
       <p class="card-text">${event.description}</p>
-      <a href="#" class="btn color">More info</a>
+      <a href="./details.html" class="btn color">More info</a>
     </div>
     </div>
     `;

@@ -19,8 +19,6 @@
     height: 100%;
 }
 
-.detailsImgInfo{}
-
 .detailsImgInfo h3{
     font-size: 2rem;
     font-weight: 500;
@@ -54,4 +52,30 @@
     padding: 5px 10px;
     font-weight: 300;
     cursor: pointer;
+}
+
+@media screen and (min-width: 750px){
+    .detailsContainer{
+        flex-direction: row;
+    }
+
+    .detailsImgContainer{
+        height: 300px;
+        max-width: 300px;
+    }
+
+    .detailsImgInfo{
+        padding: 0 1em;
+    }
+
+    .detailsImgInfo h3{
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .detailsImgInfo p{
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
 }
