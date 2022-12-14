@@ -677,10 +677,11 @@ const site = () => {
 const cardGenerator = (events) => {
   let date = "";
 
+  // <img src="${event.image}" class="card-img-top" alt="...">
+
   for (const event of events) {
     const card = `
     <div class="card m-2" style="width: 18rem;">
-    <img src="${event.image}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${event.name}</h5>
       <h5 class="card-title d-none category">${event.category}</h5>
@@ -842,10 +843,65 @@ const saveDateEveent = () => {
 
 };
 
+//Stats
+
+//1ra linea de la tabla
+
+ const percentageOfAudience = (dataBase) => {
+
+  const audience = [];
+
+  const tenPercentToEvents = Math.round(dataBase.length * 0.1);
+
+  dataBase.forEach((event) => {
+
+    let assistanceOrEstimated = 0;
+
+    if (event.assistance) {
+      assistanceOrEstimated = event.assistance;
+    } else {
+      assistanceOrEstimated = event.estimate;
+    }
+
+    let percentage = Math.round((assistanceOrEstimated * 100) / event.capacity);
+
+    event.percentage = percentage;
+
+    audience.push(event);
+
+  });
+
+  const minorToMajor = audience.sort((a, b) => a.percentage - b.percentage);
+
+  const tenPercentMinor = minorToMajor.slice(0, tenPercentToEvents);
+
+  localStorage.setItem('tenPercentMinor', JSON.stringify(tenPercentMinor));
+
+  const majorToMinor = audience.sort((a, b) => b.percentage - a.percentage);
+
+  const tenPercentMajor = majorToMinor.slice(0, tenPercentToEvents);
+
+  localStorage.setItem('tenPercentMajor', JSON.stringify(tenPercentMajor));
+
+  const capacity = audience.sort((a, b) => b.capacity - a.capacity);
+
+  const tenPercentCapacity = capacity.slice(0, tenPercentToEvents);
+
+  localStorage.setItem('tenPercentCapacity', JSON.stringify(tenPercentCapacity));
+
+};
+
+
+
+
+
+
+
 
 cardGenerator(dataBase);
 site();
 categoriesGenerator();
 searchAndFilterCards();
 saveDateEveent();
+percentageOfAudience(dataBase);
 
