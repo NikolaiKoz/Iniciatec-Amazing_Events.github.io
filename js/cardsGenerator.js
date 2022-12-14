@@ -891,6 +891,160 @@ const saveDateEveent = () => {
 
 };
 
+const upcomingEventsStaticsByCategory = (dataBase) => {
+
+  //I want an array with the upcoming events
+
+  const upcomingEvents = [];
+
+  dataBase.forEach((event) => {
+
+    let eventDate = Date.parse(event.date);
+
+      if (eventDate > actualDate) {
+        upcomingEvents.push(event);
+      }
+  });
+
+  const categories = [];
+
+  upcomingEvents.forEach((event) => {
+
+    if (!categories.includes(event.category)) {
+      categories.push(event.category);
+    }
+
+  });
+
+  //Now I have an array with the categories and i need compare the categories with the upcoming events if the category is the same I need to add the reserves and the percentage
+
+  const categoriesWithReserves = [];
+
+  categories.forEach((category) => {
+
+
+    let counter = 0;
+    let reserves = 0;
+    let categories = '';
+    let counterUpcomingEvents = 0;
+    let percentage = 0;
+
+    upcomingEvents.forEach((event) => {
+
+      counterUpcomingEvents++;
+
+      if (category === event.category) {
+
+        categories = category;
+        counter++;
+        reserves += parseInt(event.estimate);
+        percentage += event.percentage;
+
+      }
+
+      if (counterUpcomingEvents === upcomingEvents.length) {
+
+        //No sobre escribo el objeto, creo uno nuevo y lo agrego al array
+
+        const UpcomingEventsByCategory = {
+          category: '',
+          reserves: 0,
+          percentage: 0
+        };
+
+        UpcomingEventsByCategory.category = categories;
+        UpcomingEventsByCategory.reserves = reserves;
+        UpcomingEventsByCategory.percentage = Math.round((percentage) / counter);
+
+        categoriesWithReserves.push(UpcomingEventsByCategory);
+
+      }
+  });
+  });
+
+  localStorage.setItem('categoriesWithReserves', JSON.stringify(categoriesWithReserves));
+
+};
+
+const pastEventsStaticsByCategory = (dataBase) => {
+
+  //I want an array with the upcoming events
+
+  const pastEvents = [];
+
+  dataBase.forEach((event) => {
+
+    let eventDate = Date.parse(event.date);
+
+      if (eventDate < actualDate) {
+        pastEvents.push(event);
+      }
+  });
+
+  const categories = [];
+
+  pastEvents.forEach((event) => {
+
+    if (!categories.includes(event.category)) {
+      categories.push(event.category);
+    }
+
+  });
+
+  //Now I have an array with the categories and i need compare the categories with the upcoming events if the category is the same I need to add the reserves and the percentage
+
+  const theLastList = [];
+
+  categories.forEach((category) => {
+
+
+    let counter = 0;
+    let reserves = 0;
+    let categories = '';
+    let counterUpcomingEvents = 0;
+    let percentage = 0;
+
+    pastEvents.forEach((event) => {
+
+      counterUpcomingEvents++;
+
+      if (category === event.category) {
+
+        categories = category;
+        counter++;
+        reserves += parseInt(event.assistance);
+        percentage += event.percentage;
+
+      }
+
+      if (counterUpcomingEvents === pastEvents.length) {
+
+        //No sobre escribo el objeto, creo uno nuevo y lo agrego al array
+
+        const UpcomingEventsByCategory = {
+          category: '',
+          reserves: 0,
+          percentage: 0
+        };
+
+        UpcomingEventsByCategory.category = categories;
+        UpcomingEventsByCategory.reserves = reserves;
+        UpcomingEventsByCategory.percentage = Math.round((percentage) / counter);
+
+        theLastList.push(UpcomingEventsByCategory);
+
+      }
+  });
+  });
+
+  localStorage.setItem('theLastList', JSON.stringify(theLastList));
+
+
+
+
+
+};
+
 
 
 
@@ -904,4 +1058,6 @@ categoriesGenerator();
 searchAndFilterCards();
 saveDateEveent();
 percentageOfAudience(dataBase);
+upcomingEventsStaticsByCategory(dataBase);
+pastEventsStaticsByCategory(dataBase);
 

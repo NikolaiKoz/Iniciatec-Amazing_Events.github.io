@@ -20,14 +20,52 @@ const eventStatistcs = () => {
 
     }
 
-
-
-
-
-
-
-
-
-
 };
+
+const upcomingEventsStaticsByCategory = () => {
+
+    const categoriesWithReserves = JSON.parse(localStorage.getItem('categoriesWithReserves'));
+
+    const upcomingEventsStaticsByCategory = document.getElementById('upcomingEventsStaticsByCategory');
+
+    for (let index = 0; index < categoriesWithReserves.length; index++) {
+
+        let table = `
+        <tr>
+            <td colspan="2">${categoriesWithReserves[index].category}</td>
+            <td colspan="2">${categoriesWithReserves[index].reserves}</td>
+            <td colspan="1">${categoriesWithReserves[index].percentage}%</td>
+        </tr>
+        `;
+
+        upcomingEventsStaticsByCategory.innerHTML += table;
+
+    }
+};
+
+const pastEventsStaticsByCategory = () => {
+
+    const theLastList = JSON.parse(localStorage.getItem('theLastList'));
+
+    const pastEventsStaticsByCategory = document.getElementById('pastEventsStaticsByCategory');
+
+    for (let index = 0; index < theLastList.length; index++) {
+
+        let table = `
+        <tr>
+            <td colspan="2">${theLastList[index].category}</td>
+            <td colspan="2">${theLastList[index].reserves}</td>
+            <td colspan="1">${theLastList[index].percentage}%</td>
+        </tr>
+        `;
+
+        pastEventsStaticsByCategory.innerHTML += table;
+
+    }
+};
+
+
+
 eventStatistcs();
+upcomingEventsStaticsByCategory();
+pastEventsStaticsByCategory();
