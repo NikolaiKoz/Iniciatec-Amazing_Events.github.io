@@ -211,7 +211,9 @@ const cardGenerator = (events) => {
       <h5 class="card-title">${event.name}</h5>
       <h5 class="card-title d-none category">${event.category}</h5>
       <p class="card-text">${event.description}</p>
-      <a href="./details.html" class="btn color">More info</a>
+      <p class="card-text d-none">${event.date}</p>
+      <p class="card-text d-none">${event.price}</p>
+      <a href="../details.html" class="btn color moreInfoBtn">More info</a>
     </div>
     </div>
     `;
@@ -335,7 +337,41 @@ const searchAndFilterCards = () => {
   });
 };
 
+const saveDateEveent = () => {
+
+  const moreInfoBtn = document.querySelectorAll('.moreInfoBtn');
+
+  moreInfoBtn.forEach((btn) => {
+
+    const dataEvent = {
+      img: '',
+      name: '',
+      description: '',
+      date: '',
+      price: ''
+    }
+
+    btn.addEventListener('click', (event) => {
+
+      dataEvent.img = event.target.parentElement.parentElement.children[0].src;
+      dataEvent.name = event.target.parentElement.children[0].textContent;
+      dataEvent.description = event.target.parentElement.children[2].textContent;
+      dataEvent.date = event.target.parentElement.children[3].textContent;
+      dataEvent.price = event.target.parentElement.children[4].textContent;
+
+      localStorage.setItem('dataEvent', JSON.stringify(dataEvent));
+
+
+    });
+
+  });
+
+};
+
+
 cardGenerator(dataBase);
 site();
 categoriesGenerator();
 searchAndFilterCards();
+saveDateEveent();
+
