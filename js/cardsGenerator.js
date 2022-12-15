@@ -682,6 +682,7 @@ const cardGenerator = (events) => {
   for (const event of events) {
     const card = `
     <div class="card m-2" style="width: 18rem;">
+    <img src="${event.image}" class="card-img-top" alt="Event img">
     <div class="card-body">
       <h5 class="card-title">${event.name}</h5>
       <h5 class="card-title d-none category">${event.category}</h5>
@@ -780,7 +781,6 @@ const searchAndFilterCards = () => {
 
   search.addEventListener("keyup", (event) => {
     const allCategory = document.getElementById("info");
-    allCategory.checked = true;
 
     let inputText = event.target.value;
 
